@@ -15,7 +15,7 @@ class EmployeeTestCase(APITestCase):
     def test_employee_create(self):
         """Тест на создание пользователя."""
         # Arrange(подготавливаю данные для теста)
-        url = reverse('staff:employee-create')
+        url = reverse('employees:employee-create')
 
         # Act(совершаю действие которое тестирую)
         data = {'full_name': 'test_2', 'post': 'test_2'}
@@ -32,7 +32,7 @@ class EmployeeTestCase(APITestCase):
     def test_employee_update(self):
         """Тест на обновление пользователя."""
         # Arrange(подготавливаю данные для теста)
-        url = reverse('staff:employee-update', args=(self.employee.pk,))
+        url = reverse('employees:employee-update', args=(self.employee.pk,))
 
         # Act(совершаю действие которое тестирую)
         data = {'full_name': 'test_new'}
@@ -50,7 +50,7 @@ class EmployeeTestCase(APITestCase):
     def test_employee_delete(self):
         """Тест на удаление пользователя."""
         # Arrange(подготавливаю данные для теста)
-        url = reverse('staff:employee-destroy', args=(self.employee.pk,))
+        url = reverse('employees:employee-destroy', args=(self.employee.pk,))
 
         # Act(совершаю действие которое тестирую)
         response = self.client.delete(url)
@@ -66,7 +66,7 @@ class EmployeeTestCase(APITestCase):
     def test_employee_retrieve(self):
         """Тест на детальный просмотр пользователя."""
         # Arrange(подготавливаю данные для теста)
-        url = reverse('staff:employee-retrieve', args=(self.employee.pk,))
+        url = reverse('employees:employee-retrieve', args=(self.employee.pk,))
 
         # Act(совершаю действие которое тестирую)
         response = self.client.get(url)
@@ -83,7 +83,7 @@ class EmployeeTestCase(APITestCase):
     def test_employee_list(self):
         """Тест на просмотр всех пользователей."""
         # Arrange(подготавливаю данные для теста)
-        url = reverse('staff:employee-list')
+        url = reverse('employees:employee-list')
 
         # Act(совершаю действие которое тестирую)
         response = self.client.get(url)
@@ -116,7 +116,7 @@ class TaskTestCase(APITestCase):
     def test_employee_create(self):
         """Тест на создание задачи и добавление +1 к списку задач сотрудника, к которому относится эта задача."""
         # Arrange(подготавливаю данные для теста)
-        url = reverse('staff:task-create')
+        url = reverse('employees:task-create')
 
         # Act(совершаю действие которое тестирую)
         data = {'title': 'test_2', 'parent_task': self.task.pk, 'employee': self.employee.pk, 'date': '2024-02-02'}
@@ -136,7 +136,7 @@ class TaskTestCase(APITestCase):
     def test_task_update(self):
         """Тест на обновление задачи."""
         # Arrange(подготавливаю данные для теста)
-        url = reverse('staff:task-update', args=(self.task.pk,))
+        url = reverse('employees:task-update', args=(self.task.pk,))
 
         # Act(совершаю действие которое тестирую)
         data = {'title': 'test_new'}
@@ -154,7 +154,7 @@ class TaskTestCase(APITestCase):
     def test_task_delete(self):
         """Тест на удаление задачи с проверкой, что и у пользователя назначенного на эту задачу она удаляется."""
         # Arrange(подготавливаю данные для теста)
-        url = reverse('staff:task-destroy', args=(self.task.pk,))
+        url = reverse('employees:task-destroy', args=(self.task.pk,))
 
         # Act(совершаю действие которое тестирую)
         response = self.client.delete(url)
@@ -173,7 +173,7 @@ class TaskTestCase(APITestCase):
     def test_task_retrieve(self):
         """Тест на детальный просмотр задачи."""
         # Arrange(подготавливаю данные для теста)
-        url = reverse('staff:task-retrieve', args=(self.task.pk,))
+        url = reverse('employees:task-retrieve', args=(self.task.pk,))
 
         # Act(совершаю действие которое тестирую)
         response = self.client.get(url)
@@ -190,7 +190,7 @@ class TaskTestCase(APITestCase):
     def test_task_list(self):
         """Тест на просмотр всех задач."""
         # Arrange(подготавливаю данные для теста)
-        url = reverse('staff:task-list')
+        url = reverse('employees:task-list')
 
         # Act(совершаю действие которое тестирую)
         response = self.client.get(url)
@@ -226,7 +226,7 @@ class EmployeeWithTaskTestCase(APITestCase):
     def test_employee_with_task_list(self):
         """Тест на просмотр списка сотрудников с их задачами и общим количеством задач."""
         # Arrange(подготавливаю данные для теста)
-        url = reverse('staff:employee_with_task-list')
+        url = reverse('employees:employee_with_task-list')
 
         # Act(совершаю действие которое тестирую)
         response = self.client.get(url)
@@ -272,7 +272,7 @@ class ImportantTasksTestCase(APITestCase):
     def test_employee_with_task_list(self):
         """Тест на просмотр списка в формате {важная задача, срок, фио сотрудника}."""
         # Arrange(подготавливаю данные для теста)
-        url = reverse('staff:important_tasks-list')
+        url = reverse('employees:important_tasks-list')
 
         # Act(совершаю действие которое тестирую)
         response = self.client.get(url)

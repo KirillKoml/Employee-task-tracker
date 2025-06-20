@@ -16,12 +16,21 @@ class Employee(models.Model):
 
 class Task(models.Model):
     """Модель задачи."""
-    title = models.CharField(max_length=50, verbose_name='Название')
-    parent_task = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True)
-    employee = models.ForeignKey(Employee, on_delete=models.SET_NULL, verbose_name='Исполнитель',
-                                 related_name='employee_task', null=True, blank=True)
+    title = models.CharField(max_length=50,
+                             verbose_name='Название')
+    parent_task = models.ForeignKey('self',
+                                    on_delete=models.SET_NULL,
+                                    null=True,
+                                    blank=True)
+    employee = models.ForeignKey(Employee,
+                                 on_delete=models.SET_NULL,
+                                 verbose_name='Исполнитель',
+                                 related_name='employee_task',
+                                 null=True,
+                                 blank=True)
     date = models.DateField(verbose_name='До какого числа нужно выполнить')
-    status = models.BooleanField(default=False, verbose_name='Статус False - задача выполняется, статус True - задача'
+    status = models.BooleanField(default=False,
+                                 verbose_name='Статус False - задача выполняется, статус True - задача'
                                                              'выполнена')
 
     class Meta:
